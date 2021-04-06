@@ -14,9 +14,6 @@ useLayoutEffect(()=>{
 },[resultado])
 
 return (
-        //     <PantallaStyled> 
-        //         <h3> { state }</h3>
-        //         </PantallaStyled>
         <PantallaStyled value={state} readOnly/>
         )
 }
