@@ -1,4 +1,5 @@
 import React from 'react'
+import { eliminarPrimero, eliminarUltimo } from '../utils';
 import { ACTIONS } from '../utils/helpers';
 
 const initialState = {
@@ -11,9 +12,25 @@ export function rootReducer(state = initialState, action) {
             return{
                 ...state, 
                 resultado: state.resultado + action.payload,
-                sync:!state.sync
-                 }
-    
+                 };
+        case ACTIONS.limpiarTodo:
+            return{
+                ...state, 
+                resultado: '',
+                };
+                
+        case ACTIONS.eliminarPrimero:
+            return{
+                ...state, 
+                resultado: eliminarPrimero(state.resultado),
+                };
+                
+        case ACTIONS.eliminarUltimo:
+            return{
+                ...state, 
+                resultado: eliminarUltimo(state.resultado),
+                };
+            
         default:
             return state
     }

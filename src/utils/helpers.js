@@ -1,3 +1,6 @@
 export const ACTIONS = {
-    agregarNumero: 'agregarNumero'
+    agregarNumero: 'agregarNumero',
+    limpiarTodo: 'limpiarTodo',
+    eliminarUltimo:'eliminarUltimo',
+    eliminarPrimero: 'eliminarPrimero'
 }
