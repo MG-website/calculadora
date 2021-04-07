@@ -8,12 +8,46 @@ export const operadores = () =>{
 
 export const eliminarPrimero = (str) =>{
 str = str.split('')
-srt.shift()
-return srt.join('')
+str.shift()
+return str.join('')
 };
 
 export const eliminarUltimo = (str) =>{
     str = str.split('')
-    srt.pop()
-    return srt.join('')
-    }
+    str.pop()
+    return str.join('')
+    };
+
+export const utilsSumar = (str) =>{
+    let terminos = str.split('+');
+    let total=0;
+    let t = terminos.map(element => {
+       let resultadoDivision;
+        if(element.includes('/')){
+            let terminosDivision = element.split('/')
+            console.log(terminosDivision)
+            terminosDivision.forEach((elementDivision,i) =>{
+                let siguiente = i + 1
+                if(siguiente < terminosDivision.length ){
+                    console.log('s',siguiente)
+                    console.log(elementDivision / terminosDivision[siguiente])
+                    if(!resultadoDivision){
+
+                        resultadoDivision = elementDivision / terminosDivision[siguiente]
+                    }else{
+                        resultadoDivision = resultadoDivision / terminosDivision[siguiente]
+                    }
+                    console.log('s',resultadoDivision)
+                }
+            })
+            return resultadoDivision 
+        }
+        return element
+    });
+    t.forEach(element => {
+        total += Number(element)
+    })
+    console.log(t)
+    console.log(total)
+}
+console.log(utilsSumar('10/2+20/2+10+10/2'))

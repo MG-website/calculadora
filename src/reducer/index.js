@@ -20,11 +20,12 @@ export function rootReducer(state = initialState, action) {
                 };
                 
         case ACTIONS.eliminarPrimero:
+      
             return{
                 ...state, 
                 resultado: eliminarPrimero(state.resultado),
                 };
-                
+
         case ACTIONS.eliminarUltimo:
             return{
                 ...state, 
