@@ -89,7 +89,7 @@ let total;
 let terminos = terminosResta.map(termino => {
 let resultadoTermino=0;
 console.log(termino.includes('/'))
-if(termino.includes('/') && !termino.includes('*')){
+if(termino.includes('/') && !termino.includes('*') && !termino.includes('+')){
     console.log(termino)
     console.log(division(termino))
     if(division(termino) === NaN) throw Error('orrio un error')
@@ -98,10 +98,24 @@ if(termino.includes('/') && !termino.includes('*')){
 }
 console.log(termino.includes('*'))
 
-if(termino.includes('*') && !termino.includes('/')){
+if(termino.includes('*') && !termino.includes('/') && !termino.includes('+')){
     if(multiplicacion(termino)=== NaN) throw Error('orrio un error')
     resultadoTermino =  multiplicacion(termino)
     return resultadoTermino
+}
+if(termino.includes('*') && termino.includes('/') && !termino.includes('+')){
+    let d = '/'
+let indexDivision = termino.split('').findIndex((e) => e=== '/')
+let indexMultiplicacion = termino.split('').findIndex((e)=> e === '*')
+let subTermino = termino.split('/')
+subTermino = termino.split('')
+console.log(subTermino)
+console.log(indexDivision)
+console.log(indexMultiplicacion)
+if(indexDivision < indexMultiplicacion){
+
+}
+
 }
 console.log(resultadoTermino)
 return termino
@@ -116,5 +130,37 @@ terminos.forEach( resTermino =>{
 return total
 }
 
-console.log(resta('100-50/2-4*2'))
+console.log(resta('100-50/2-10/4*2'))
 
+const multiplicacionDivision = (str) => {
+    let total;
+    let indexDivision = str.split('').findIndex((e) => e=== '/')
+    let indexMultiplicacion = str.split('').findIndex((e)=> e === '*')
+    let resultadoTermino=0;
+    if(indexDivision !== -1 && indexDivision < indexMultiplicacion) {
+        let termino = str.split('*')
+    let subTermino =    termino.map( (element,i) => {
+
+                if(element.includes('*')){
+                    return multiplicacion(element)
+                }else{
+                    return element
+                }
+        })
+        console.log(subTermino)
+        subTermino.forEach( num => {
+            if(total === undefined){
+                console.log(total)
+                if(num.includes('/')) total = division(num)
+                else total = num
+            }else{
+                if(num.includes('/')) total = total * division(num)
+                else total = total * num
+            }
+        })
+        return total
+    }
+
+    }
+console.log('4*8/3')
+    console.log(multiplicacionDivision('4*8/3'))
