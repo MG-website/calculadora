@@ -51,3 +51,70 @@ export const utilsSumar = (str) =>{
     console.log(total)
 }
 console.log(utilsSumar('10/2+20/2+10+10/2'))
+
+const division = (str)=>{
+    let numeros = str.split('/');
+    if(numeros.length<2 || numeros.includes('')) throw Error( 'se requiere dividendo y divisor')
+    let resultado= numeros[0] / numeros[1]
+numeros.forEach( (num,i) =>{
+    if(i >1 ){
+        let siguiente = i +1
+            if(resultado){
+               resultado = resultado / num
+            }else{
+                resultado = num / numeros[siguiente];
+       }
+    }
+})
+return resultado;
+}
+//console.log(division('10/2'))
+const multiplicacion = (str)=>{
+    if(!str.includes('*')) throw Error('falta el operando * para multiplicar');
+    let numeros = str.split('*');
+    if(numeros.length < 1 || numeros.includes('')) throw Error('se requiere multiplicando y multiplicador')
+    let resultado = numeros[0] * numeros[1]
+    numeros.forEach( (num,i) =>{
+        if(i> 1){
+            resultado = resultado * num
+        }
+    })
+    return resultado
+}
+// console.log(multiplicacion('8*2'))
+
+const resta = (str)=>{
+let terminosResta = str.split('-');
+let total;
+let terminos = terminosResta.map(termino => {
+let resultadoTermino=0;
+console.log(termino.includes('/'))
+if(termino.includes('/') && !termino.includes('*')){
+    console.log(termino)
+    console.log(division(termino))
+    if(division(termino) === NaN) throw Error('orrio un error')
+    resultadoTermino =  division(termino)
+    return resultadoTermino
+}
+console.log(termino.includes('*'))
+
+if(termino.includes('*') && !termino.includes('/')){
+    if(multiplicacion(termino)=== NaN) throw Error('orrio un error')
+    resultadoTermino =  multiplicacion(termino)
+    return resultadoTermino
+}
+console.log(resultadoTermino)
+return termino
+})
+console.log(terminos)
+terminos.forEach( resTermino =>{
+    console.log(resTermino)
+    if(total === undefined) total = resTermino
+    else
+    total = total - resTermino
+})
+return total
+}
+
+console.log(resta('100-50/2-4*2'))
+
