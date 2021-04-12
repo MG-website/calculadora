@@ -139,16 +139,16 @@ const multiplicacionDivision = (str) => {
     let resultadoTermino=0;
     if(indexDivision !== -1 && indexDivision < indexMultiplicacion) {
         let termino = str.split('*')
-    let subTermino =    termino.map( (element,i) => {
+        console.log(termino)
+    // let subTermino =    termino.map( (element,i) => {
 
-                if(element.includes('*')){
-                    return multiplicacion(element)
-                }else{
-                    return element
-                }
-        })
-        console.log(subTermino)
-        subTermino.forEach( num => {
+    //             // if(element.includes('*')){
+    //             //     return multiplicacion(element)
+    //             // }else{
+    //                 return element
+    //             // }
+    //     })
+        termino.forEach( num => {
             if(total === undefined){
                 console.log(total)
                 if(num.includes('/')) total = division(num)
@@ -160,7 +160,24 @@ const multiplicacionDivision = (str) => {
         })
         return total
     }
+    if(indexMultiplicacion !== -1 && indexMultiplicacion < indexDivision){
+        let termino = str.split('/')
+        console.log(termino)
+        termino.forEach( num => {
+            if(total === undefined){
+                console.log(total)
+                if(num.includes('*')) total = multiplicacion(num)
+                else total = num
+            }else{
+                if(num.includes('*')) total = total * multiplicacion(num)
+                else total = total / num
+            }
+        })
+        return total
+    }
 
     }
 console.log('4*8/3')
+console.log(4*8/3)
+    // console.log(multiplicacionDivision('4/8*3'))
     console.log(multiplicacionDivision('4*8/3'))
