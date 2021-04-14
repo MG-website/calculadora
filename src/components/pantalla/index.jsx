@@ -2,19 +2,23 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { resultadoSelector, syncSelector } from '../../utils/selectors'
 import { PantallaStyled } from '../styles'
-
+import {  resultado } from '../../utils'
 export function Pantalla() {
-const resultado = useSelector(resultadoSelector);
- const [state,setState]=useState(resultado)
-
+const res = useSelector(resultadoSelector);
+ const [state,setState]=useState(res)
+const resultadoDinamico = resultado(res)
 useLayoutEffect(()=>{
-   if(resultado !== state){
-           setState(resultado)
+   if(res !== state){
+           setState(res)
    }     
-},[resultado])
+},[res])
 
 return (
-        <PantallaStyled value={state} readOnly/>
+        <div>
+
+                <PantallaStyled value={state} readOnly/>
+                <input type="text" readOnly value={resultadoDinamico}/>
+        </div>
         )
 }
 
