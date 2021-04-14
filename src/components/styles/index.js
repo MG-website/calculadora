@@ -1,15 +1,28 @@
 import styled from "styled-components";
 
 export const PantallaStyled = styled.input `
-width : 100%;
+width : 310px;
 border-radius: 1%;
 background-color: #f2f2f2;
 border: 1px solid black;
-height: 50px
+height: 50px;
+border-bottom:none;
+text-align: end;
+`;
+
+export const PantallaResultadoDinamico = styled.input`
+width : 310px;
+border-radius: 1%;
+background-color: #f2f2f2;
+border: 1px solid black;
+height: 25px;
+border-top:none;
+text-align: end;
+font-size: 22px;
 `;
 
 export const ContenedorStyled = styled.div `
-width : 325px;
+width : 320px;
 margin:auto;
 `;
 export const ContenedorBotonesStyled = styled.div `

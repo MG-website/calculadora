@@ -3,5 +3,10 @@ export const ACTIONS = {
     limpiarTodo: 'limpiarTodo',
     eliminarUltimo:'eliminarUltimo',
     eliminarPrimero: 'eliminarPrimero',
-    sumar:'sumar'
+    sumar:'sumar',
+    restar: 'restar',
+    multiplicar: 'multiplicar',
+    dividir: 'dividir',
+    punto: 'punto',
+    igual: 'igual'
 }

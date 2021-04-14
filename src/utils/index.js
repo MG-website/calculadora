@@ -3,7 +3,7 @@ export const numeros = () =>{
 }
 
 export const operadores = () =>{
-    return ['+', '-', '*', '/', 'C', '=']
+    return ['+', '-', '*', '/', 'C', '=','.']
 }
 
 export const eliminarPrimero = (str) =>{
@@ -22,7 +22,7 @@ export const eliminarUltimo = (str) =>{
 
 const division = (str)=>{
     let numeros = str.split('/');
-    if(numeros.length<2 || numeros.includes('')) throw Error( 'se requiere dividendo y divisor')
+    // if(numeros.length<2 || numeros.includes('')) throw Error( 'se requiere dividendo y divisor')
     let resultado= numeros[0] / numeros[1]
 numeros.forEach( (num,i) =>{
     if(i >1 ){
@@ -40,7 +40,7 @@ return resultado;
 const multiplicacion = (str)=>{
     if(!str.includes('*')) throw Error('falta el operando * para multiplicar');
     let numeros = str.split('*');
-    if(numeros.length < 1 || numeros.includes('')) throw Error('se requiere multiplicando y multiplicador')
+    // if(numeros.length < 1 || numeros.includes('')) throw Error('se requiere multiplicando y multiplicador')
     let resultado = numeros[0] * numeros[1]
     numeros.forEach( (num,i) =>{
         if(i> 1){
