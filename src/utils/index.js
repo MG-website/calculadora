@@ -18,39 +18,7 @@ export const eliminarUltimo = (str) =>{
     return str.join('')
     };
 
-export const utilsSumar = (str) =>{
-    let terminos = str.split('+');
-    let total=0;
-    let t = terminos.map(element => {
-       let resultadoDivision;
-        if(element.includes('/')){
-            let terminosDivision = element.split('/')
-            console.log(terminosDivision)
-            terminosDivision.forEach((elementDivision,i) =>{
-                let siguiente = i + 1
-                if(siguiente < terminosDivision.length ){
-                    console.log('s',siguiente)
-                    console.log(elementDivision / terminosDivision[siguiente])
-                    if(!resultadoDivision){
-
-                        resultadoDivision = elementDivision / terminosDivision[siguiente]
-                    }else{
-                        resultadoDivision = resultadoDivision / terminosDivision[siguiente]
-                    }
-                    console.log('s',resultadoDivision)
-                }
-            })
-            return resultadoDivision 
-        }
-        return element
-    });
-    t.forEach(element => {
-        total += Number(element)
-    })
-    console.log(t)
-    console.log(total)
-}
-console.log(utilsSumar('10/2+20/2+10+10/2'))
+ 
 
 const division = (str)=>{
     let numeros = str.split('/');
@@ -83,9 +51,63 @@ const multiplicacion = (str)=>{
 }
 // console.log(multiplicacion('8*2'))
 
+const multiplicacionDivision = (str) => {
+    let total;
+    let indexDivision = str.split('').findIndex((e) => e=== '/')
+    let indexMultiplicacion = str.split('').findIndex((e)=> e === '*')
+    if(indexDivision !== -1 && indexDivision < indexMultiplicacion) {
+        let termino = str.split('*') 
+        termino.forEach( num => {
+            if(total === undefined){
+                console.log(total)
+                if(num.includes('/')) total = division(num)
+                else total = num
+            }else{
+                if(num.includes('/')) {
+                    let numeros = num.split('/')
+                    numeros.forEach((e,i)=>{
+                        if(i === 0)  total = total * e
+                        else
+                        total = total / e
+                    
+                    })
+                }else{
+                    total = total * num
+                }
+            }
+        })
+        return total
+    }
+    if(indexMultiplicacion !== -1 && indexMultiplicacion < indexDivision){
+        let termino = str.split('/')
+        console.log(termino)
+        termino.forEach( num => {
+            if(total === undefined){
+                if(num.includes('*')) total = multiplicacion(num)
+                else total = num
+            }else{
+                console.log(total)
+                if(num.includes('*')) {
+                    let numeros = num.split('*')
+                    numeros.forEach((e,i)=>{
+                        if(i === 0)  total = total / e
+                        else
+                        total = total * e
+                    
+                    })
+            }else{
+                total = total / num
+            }
+        }})
+        return total
+    }
+    
+    }
+
 const resta = (str)=>{
 let terminosResta = str.split('-');
 let total;
+console.log(terminosResta)
 let terminos = terminosResta.map(termino => {
 let resultadoTermino=0;
 console.log(termino.includes('/'))
@@ -104,20 +126,11 @@ if(termino.includes('*') && !termino.includes('/') && !termino.includes('+')){
     return resultadoTermino
 }
 if(termino.includes('*') && termino.includes('/') && !termino.includes('+')){
-    let d = '/'
-let indexDivision = termino.split('').findIndex((e) => e=== '/')
-let indexMultiplicacion = termino.split('').findIndex((e)=> e === '*')
-let subTermino = termino.split('/')
-subTermino = termino.split('')
-console.log(subTermino)
-console.log(indexDivision)
-console.log(indexMultiplicacion)
-if(indexDivision < indexMultiplicacion){
-
+    if(multiplicacionDivision(termino ) === NaN) throw Error('error en multiplicacionDivision')
+    resultadoTermino = multiplicacionDivision(termino)
+    return resultadoTermino
 }
-
-}
-console.log(resultadoTermino)
+console.log(termino)
 return termino
 })
 console.log(terminos)
@@ -129,55 +142,30 @@ terminos.forEach( resTermino =>{
 })
 return total
 }
+ export const resultado = (str) =>{
+    let terminos = str.split('+');
+    let t = terminos.map(element => {
+        if(element.includes('-')){
+            return resta(element)
+        }else 
+        if(!element.includes('-') && element.includes('/') && !element.includes('*')){
+            return division(element)
+        }else
+        if(!element.includes('-') && !element.includes('/') && element.includes('*')){
+            return multiplicacion(element)
+        }else
+        if(!element.includes('-') && element.includes('/') && element.includes('*')){
+            return multiplicacionDivision(element)
+        }
+        return element
+    });
+    let total=0;
+    t.forEach(element => {
+        total += Number(element)
+    })
+    return total
+}
 
-console.log(resta('100-50/2-10/4*2'))
 
-const multiplicacionDivision = (str) => {
-    let total;
-    let indexDivision = str.split('').findIndex((e) => e=== '/')
-    let indexMultiplicacion = str.split('').findIndex((e)=> e === '*')
-    let resultadoTermino=0;
-    if(indexDivision !== -1 && indexDivision < indexMultiplicacion) {
-        let termino = str.split('*')
-        console.log(termino)
-    // let subTermino =    termino.map( (element,i) => {
-
-    //             // if(element.includes('*')){
-    //             //     return multiplicacion(element)
-    //             // }else{
-    //                 return element
-    //             // }
-    //     })
-        termino.forEach( num => {
-            if(total === undefined){
-                console.log(total)
-                if(num.includes('/')) total = division(num)
-                else total = num
-            }else{
-                if(num.includes('/')) total = total * division(num)
-                else total = total * num
-            }
-        })
-        return total
-    }
-    if(indexMultiplicacion !== -1 && indexMultiplicacion < indexDivision){
-        let termino = str.split('/')
-        console.log(termino)
-        termino.forEach( num => {
-            if(total === undefined){
-                console.log(total)
-                if(num.includes('*')) total = multiplicacion(num)
-                else total = num
-            }else{
-                if(num.includes('*')) total = total * multiplicacion(num)
-                else total = total / num
-            }
-        })
-        return total
-    }
-
-    }
-console.log('4*8/3')
-console.log(4*8/3)
-    // console.log(multiplicacionDivision('4/8*3'))
-    console.log(multiplicacionDivision('4*8/3'))
+    // console.log(resultado('10+2/2*5+5-5-10/5*2/5+4-8-2*8*1/8*0+1'))
+    // console.log(10+2/2*5+5-5-10/5*2/5+4-8-2*8*1/8*0+1)
